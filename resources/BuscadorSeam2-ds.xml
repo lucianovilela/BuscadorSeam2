@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE datasources
+    PUBLIC "-//JBoss//DTD JBOSS JCA Config 1.5//EN"
+    "http://www.jboss.org/j2ee/dtd/jboss-ds_1_5.dtd">
+<datasources>
+   
+   <local-tx-datasource>
+      <jndi-name>BuscadorSeam2Datasource</jndi-name>
+      <use-java-context>true</use-java-context>
+      <connection-url>jdbc:oracle:thin:@sigma.pgt.mpt.gov.br:1521:isis</connection-url>
+      <driver-class>oracle.jdbc.OracleDriver</driver-class>
+      <user-name>mpt_protocolo</user-name>
+      <password>protocolo</password>
+   </local-tx-datasource>
+    
+</datasources>

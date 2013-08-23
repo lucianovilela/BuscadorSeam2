@@ -1,0 +1,40 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:mpt="http://www.mpt.gov.br/seam">
+	<style type="text/css">
+.dr-mpnl-pnl {
+	overflow: auto !important
+}
+</style>
+	<a4j:outputPanel>
+		<rich:modalPanel id="#{modalName}" shadowDepth="10" autosized="true"
+			moveable="true" width="800" top="20" minHeight="100"
+			onshow="onLoadModal(#{modalName})">
+			<f:facet name="header">
+				<h:outputText value="Pop-up" />
+
+			</f:facet>
+			<f:facet name="controls">
+				<a4j:form>
+					<a4j:commandLink action="#{filtroOrigemDestino.reset()}"
+						ajaxSingle="true"
+						onclick="Richfaces.hideModalPanel('#{modalName}')">
+						<s:graphicImage url="/img/false.png" style="border: 0"
+							title="Fechar" />
+					</a4j:commandLink>
+				</a4j:form>
+			</f:facet>
+
+			<div style="width: 100%; height: 290px; overflow: auto;"></div>
+		</rich:modalPanel>
+	</a4j:outputPanel>
+
+</ui:composition>

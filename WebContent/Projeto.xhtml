@@ -1,0 +1,137 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:tabPanel height="80%">
+        <f:facet name="header">Projeto Details</f:facet>
+
+		<rich:tab label="identificacao" switchType="client">
+        <s:decorate id="dataCriacao" template="layout/display.xhtml">
+            <ui:define name="label">Data criacao</ui:define>
+            <h:outputText value="#{projetoHome.instance.dataCriacao}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="nome" template="layout/display.xhtml">
+            <ui:define name="label">Nome</ui:define>
+            <h:outputText value="#{projetoHome.instance.nome}"/>
+        </s:decorate>
+		</rich:tab>
+		<rich:tab label="Separador">
+        <s:decorate id="separadorArquivoPadroes" template="layout/display.xhtml">
+            <ui:define name="label">Separador arquivo padroes</ui:define>
+            <h:outputText value="#{projetoHome.instance.separadorArquivoPadroes}"/>
+        </s:decorate>
+
+
+
+        <s:decorate id="separadorDiretorioEntrada" template="layout/display.xhtml">
+            <ui:define name="label">Separador diretorio entrada</ui:define>
+            <h:outputText value="#{projetoHome.instance.separadorDiretorioEntrada}"/>
+        </s:decorate>
+
+        <s:decorate id="separadorDiretorioSaida" template="layout/display.xhtml">
+            <ui:define name="label">Separador diretorio saida</ui:define>
+            <h:outputText value="#{projetoHome.instance.separadorDiretorioSaida}"/>
+        </s:decorate>
+
+        <s:decorate id="separadorMascara" template="layout/display.xhtml">
+            <ui:define name="label">Separador mascara</ui:define>
+            <h:outputText value="#{projetoHome.instance.separadorMascara}"/>
+        </s:decorate>
+
+        <s:decorate id="separadorNumeroThreads" template="layout/display.xhtml">
+            <ui:define name="label">Separador numero threads</ui:define>
+            <h:outputText value="#{projetoHome.instance.separadorNumeroThreads}"/>
+        </s:decorate>
+
+        <s:decorate id="separadorQuantidadeTermos" template="layout/display.xhtml">
+            <ui:define name="label">Separador quantidade termos</ui:define>
+            <h:outputText value="#{projetoHome.instance.separadorQuantidadeTermos}"/>
+        </s:decorate>
+		</rich:tab>
+		<rich:tab label="Stop List">
+        <s:decorate id="stopListArquivo" template="layout/display.xhtml">
+            <ui:define name="label">Stop list arquivo</ui:define>
+            <h:outputText value="#{projetoHome.instance.stopListArquivo}"/>
+        </s:decorate>
+
+
+
+        <s:decorate id="stopListDiretorioEntrada" template="layout/display.xhtml">
+            <ui:define name="label">Stop list diretorio entrada</ui:define>
+            <h:outputText value="#{projetoHome.instance.stopListDiretorioEntrada}"/>
+        </s:decorate>
+
+        <s:decorate id="stopListDiretorioSaida" template="layout/display.xhtml">
+            <ui:define name="label">Stop list diretorio saida</ui:define>
+            <h:outputText value="#{projetoHome.instance.stopListDiretorioSaida}"/>
+        </s:decorate>
+
+        <s:decorate id="stopListMascara" template="layout/display.xhtml">
+            <ui:define name="label">Stop list mascara</ui:define>
+            <h:outputText value="#{projetoHome.instance.stopListMascara}"/>
+        </s:decorate>
+
+        <s:decorate id="stopListNumeroThreads" template="layout/display.xhtml">
+            <ui:define name="label">Stop list numero threads</ui:define>
+            <h:outputText value="#{projetoHome.instance.stopListNumeroThreads}"/>
+        </s:decorate>
+		</rich:tab>
+		<rich:tab label="Tagger">
+
+        <s:decorate id="taggerDiretorioEntrada" template="layout/display.xhtml">
+            <ui:define name="label">Tagger diretorio entrada</ui:define>
+            <h:outputText value="#{projetoHome.instance.taggerDiretorioEntrada}"/>
+        </s:decorate>
+
+        <s:decorate id="taggerDiretorioSaida" template="layout/display.xhtml">
+            <ui:define name="label">Tagger diretorio saida</ui:define>
+            <h:outputText value="#{projetoHome.instance.taggerDiretorioSaida}"/>
+        </s:decorate>
+
+        <s:decorate id="taggerDiretorioTagger" template="layout/display.xhtml">
+            <ui:define name="label">Tagger diretorio tagger</ui:define>
+            <h:outputText value="#{projetoHome.instance.taggerDiretorioTagger}"/>
+        </s:decorate>
+
+        <s:decorate id="taggerMascara" template="layout/display.xhtml">
+            <ui:define name="label">Tagger mascara</ui:define>
+            <h:outputText value="#{projetoHome.instance.taggerMascara}"/>
+        </s:decorate>
+
+        <s:decorate id="taggerNumeroThreads" template="layout/display.xhtml">
+            <ui:define name="label">Tagger numero threads</ui:define>
+            <h:outputText value="#{projetoHome.instance.taggerNumeroThreads}"/>
+        </s:decorate>
+		</rich:tab>
+        <div style="clear:both"/>
+
+    </rich:tabPanel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ProjetoEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty projetoFrom ? 'ProjetoList' : projetoFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+
+
+</ui:define>
+
+</ui:composition>

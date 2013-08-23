@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+   <param name="firstResult" value="#{projetoList.firstResult}"/>
+   <param name="sort" value="#{projetoList.orderColumn}"/>
+   <param name="dir" value="#{projetoList.orderDirection}"/>
+
+   <param name="from"/>
+   <param name="nome" value="#{projetoList.projeto.nome}"/>
+   <param name="separadorArquivoPadroes" value="#{projetoList.projeto.separadorArquivoPadroes}"/>
+   <param name="separadorClassConsumidor" value="#{projetoList.projeto.separadorClassConsumidor}"/>
+   <param name="separadorClassProdutor" value="#{projetoList.projeto.separadorClassProdutor}"/>
+   <param name="separadorDiretorioEntrada" value="#{projetoList.projeto.separadorDiretorioEntrada}"/>
+   <param name="separadorDiretorioSaida" value="#{projetoList.projeto.separadorDiretorioSaida}"/>
+   <param name="separadorMascara" value="#{projetoList.projeto.separadorMascara}"/>
+   <param name="stopListArquivo" value="#{projetoList.projeto.stopListArquivo}"/>
+   <param name="stopListClassConsumidor" value="#{projetoList.projeto.stopListClassConsumidor}"/>
+   <param name="stopListClassProdutor" value="#{projetoList.projeto.stopListClassProdutor}"/>
+   <param name="stopListDiretorioEntrada" value="#{projetoList.projeto.stopListDiretorioEntrada}"/>
+   <param name="stopListDiretorioSaida" value="#{projetoList.projeto.stopListDiretorioSaida}"/>
+   <param name="stopListMascara" value="#{projetoList.projeto.stopListMascara}"/>
+   <param name="taggerClassConsumidor" value="#{projetoList.projeto.taggerClassConsumidor}"/>
+   <param name="taggerClassProdutor" value="#{projetoList.projeto.taggerClassProdutor}"/>
+   <param name="taggerDiretorioEntrada" value="#{projetoList.projeto.taggerDiretorioEntrada}"/>
+   <param name="taggerDiretorioSaida" value="#{projetoList.projeto.taggerDiretorioSaida}"/>
+   <param name="taggerDiretorioTagger" value="#{projetoList.projeto.taggerDiretorioTagger}"/>
+   <param name="taggerMascara" value="#{projetoList.projeto.taggerMascara}"/>
+
+</page>

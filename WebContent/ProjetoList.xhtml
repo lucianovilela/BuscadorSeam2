@@ -1,0 +1,140 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml"
+                xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:define name="body">
+
+    <h:form id="projetoSearch" styleClass="edit">
+        <rich:simpleTogglePanel label="Projeto Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Nome</ui:define>
+                <h:inputText id="nome" value="#{projetoList.projeto.nome}"/>
+            </s:decorate>
+
+
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/ProjetoList.xhtml"/>
+            <s:button id="reset" value="Reset">
+                <f:param name="nome"/>
+            </s:button>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Projeto Search Results</f:facet>
+    <div class="results" id="projetoList">
+
+    <h:outputText value="The projeto search returned no results."
+               rendered="#{empty listaProjetos}"/>
+	<a4j:form>
+	<ui:remove>
+	<a4j:push interval="1000" eventProducer="#{delegateProdutorConsumidor.addListener}" 
+	            			reRender="projetoList"  id="push_statusExec"/>
+	            			
+	</ui:remove>
+    <rich:dataTable id="projetoList"
+                var="_projeto"
+              value="#{listaProjetos}"
+           rendered="#{not empty listaProjetos}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{projetoList}"/>
+                    <ui:param name="propertyLabel" value="Id"/>
+                    <ui:param name="propertyPath" value="projeto.id"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_projeto.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{projetoList}"/>
+                    <ui:param name="propertyLabel" value="Data criacao"/>
+                    <ui:param name="propertyPath" value="projeto.dataCriacao"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_projeto.dataCriacao}">
+                <s:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{projetoList}"/>
+                    <ui:param name="propertyLabel" value="Nome"/>
+                    <ui:param name="propertyPath" value="projeto.nome"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_projeto.nome}"/>
+        </h:column>
+        <h:column id="statusExec#{_projeto.id}">
+            <f:facet name="header">
+            <h:outputText value="Status Execução"/>
+             </f:facet>
+            <h:outputText value="#{_projeto.status}" escape="false"/>
+			
+
+        </h:column>
+        
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <a4j:commandButton  action="${delegateProdutorConsumidor.main()}"
+                   value="Executa"
+             propagation="none"
+                      id="projetoRun" reRender="projetoList">
+                
+            </a4j:commandButton>
+            #{' '}
+            <s:link view="/#{empty from ? 'Projeto' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="projeto">
+                <f:param name="projetoId"
+                        value="#{_projeto.id}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/ProjetoEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="projetoEdit"
+                rendered="#{empty from}">
+                <f:param name="projetoId"
+                        value="#{_projeto.id}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+	</a4j:form>
+    </div>
+    <f:facet name="footer">
+    	<rich:datascroller for="projetoList" renderIfSinglePage="false"></rich:datascroller>
+    </f:facet>
+    
+    </rich:panel>
+
+
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/ProjetoEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create projeto">
+            <f:param name="projetoId"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

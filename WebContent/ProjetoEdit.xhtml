@@ -1,0 +1,380 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="projeto" styleClass="edit">
+		
+		<rich:tabPanel label="Stop List" height="80%"  switchType="client">
+        <!-- rich:panel-->
+        <rich:tab name="Identificacao" label="Identifiacao" >
+            <f:facet name="header">#{projetoHome.managed ? 'Edit' : 'Add'} Projeto</f:facet>
+
+            <s:decorate id="nomeField" template="layout/edit.xhtml">
+                <ui:define name="label">Nome</ui:define>
+                <h:inputTextarea id="nome"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.nome}"/>
+            </s:decorate>
+
+
+            <s:decorate id="dataCriacaoField" template="layout/edit.xhtml">
+                <ui:define name="label">Data criacao</ui:define>
+                <rich:calendar id="dataCriacao"
+                          value="#{projetoHome.instance.dataCriacao}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+
+		</rich:tab>
+			<rich:tab label="Stop List">
+            <s:decorate id="stopListArquivoField" template="layout/edit.xhtml">
+                <ui:define name="label">Arquivo com padrões</ui:define>
+                <h:inputTextarea id="stopListArquivo"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.stopListArquivo}"/>
+                <rich:suggestionbox for="stopListArquivoField" 
+						   suggestionAction="#{dirAutoComplete.sugestionFile}"
+						   var="dir" fetchValue="#{dir}" >
+							<rich:column>
+								<h:outputText value="#{dir}" />
+							</rich:column>
+				</rich:suggestionbox>
+            </s:decorate>
+
+
+
+            <s:decorate id="stopListDiretorioEntradaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório entrada</ui:define>
+                <h:inputTextarea id="stopListDiretorioEntrada"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.stopListDiretorioEntrada}"/>
+                <rich:suggestionbox for="stopListDiretorioEntrada" 
+						   suggestionAction="#{dirAutoComplete.sugestionDir}"
+						   var="dir" fetchValue="#{dir}" >
+							<rich:column>
+								<h:outputText value="#{dir}" />
+							</rich:column>
+				</rich:suggestionbox>
+                
+            </s:decorate>
+
+
+            <s:decorate id="stopListDiretorioSaidaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório saída</ui:define>
+                <h:inputTextarea id="stopListDiretorioSaida"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.stopListDiretorioSaida}"/>
+                <rich:suggestionbox for="stopListDiretorioSaida" 
+						   suggestionAction="#{dirAutoComplete.sugestionDir}"
+						   var="dir" fetchValue="#{dir}" >
+							<rich:column>
+								<h:outputText value="#{dir}" />
+							</rich:column>
+				</rich:suggestionbox>
+               
+            </s:decorate>
+
+
+            <s:decorate id="stopListMascaraField" template="layout/edit.xhtml">
+                <ui:define name="label">Mascara</ui:define>
+                <h:inputTextarea id="stopListMascara"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.stopListMascara}"/>
+            </s:decorate>
+
+
+            <s:decorate id="stopListNumeroThreadsField" template="layout/edit.xhtml">
+                <ui:define name="label">Número de threads</ui:define>
+                <h:inputText id="stopListNumeroThreads"
+                       required="true"
+                          value="#{projetoHome.instance.stopListNumeroThreads}">
+                    <a:support event="onblur" reRender="stopListNumeroThreadsField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+			</rich:tab>		
+		
+		<rich:tab label="Separador" ajaxSingle="true">
+
+
+					<br />
+					<s:decorate id="separadorArquivoPadroesField"
+						template="layout/edit.xhtml">
+						<ui:define name="label">Arquivo padrões</ui:define>
+						<h:inputTextarea id="separadorArquivoPadroes" cols="80" rows="1"
+							value="#{projetoHome.instance.separadorArquivoPadroes}"/>
+						<rich:suggestionbox for="separadorArquivoPadroes" 
+						   suggestionAction="#{dirAutoComplete.sugestionFile}"
+						   var="dir" fetchValue="#{dir}" >
+							<rich:column>
+								<h:outputText value="#{dir}" />
+							</rich:column>						</rich:suggestionbox>
+					</s:decorate>
+
+            <s:decorate id="separadorDiretorioEntradaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório entrada</ui:define>
+                <h:inputTextarea id="separadorDiretorioEntrada"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.separadorDiretorioEntrada}"/>
+				<rich:suggestionbox for="separadorDiretorioEntrada" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+                 
+            </s:decorate>
+
+
+            <s:decorate id="separadorDiretorioSaidaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório saída</ui:define>
+                <h:inputTextarea id="separadorDiretorioSaida"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.separadorDiretorioSaida}"/>
+				<rich:suggestionbox for="separadorDiretorioSaida" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+
+
+            </s:decorate>
+
+
+            <s:decorate id="separadorMascaraField" template="layout/edit.xhtml">
+                <ui:define name="label">Mascara</ui:define>
+                <h:inputTextarea id="separadorMascara"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.separadorMascara}"/>
+            </s:decorate>
+
+
+            <s:decorate id="separadorNumeroThreadsField" template="layout/edit.xhtml">
+                <ui:define name="label">Número de threads</ui:define>
+                <h:inputText id="separadorNumeroThreads"
+                       required="true"
+                          value="#{projetoHome.instance.separadorNumeroThreads}">
+                    <a:support event="onblur" reRender="separadorNumeroThreadsField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="separadorQuantidadeTermosField" template="layout/edit.xhtml">
+                <ui:define name="label">Quantidade de termos</ui:define>
+                <h:inputText id="separadorQuantidadeTermos"
+                       required="true"
+                          value="#{projetoHome.instance.separadorQuantidadeTermos}">
+                    <a:support event="onblur" reRender="separadorQuantidadeTermosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+			</rich:tab>
+
+
+		<rich:tab label="Gerar Bow" ajaxSingle="true">
+   			<br />
+            <s:decorate template="layout/edit.xhtml">
+                <ui:define name="label">Diretório entrada</ui:define>
+                <h:inputTextarea id="bowDiretorioEntrada"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.bowDiretorioEntrada}"/>
+				<rich:suggestionbox for="bowDiretorioEntrada" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+                 
+            </s:decorate>
+
+
+            <s:decorate template="layout/edit.xhtml">
+                <ui:define name="label">Diretório saída</ui:define>
+                <h:inputTextarea id="bowDiretorioSaida"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.bowDiretorioSaida}"/>
+				<rich:suggestionbox for="bowDiretorioSaida" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+
+
+            </s:decorate>
+
+
+            <s:decorate template="layout/edit.xhtml">
+                <ui:define name="label">Semelhança</ui:define>
+                <h:inputTextarea id="bowSemelhanca"
+                               cols="10"
+                               rows="1"
+                              value="#{projetoHome.instance.bowSemelhanca}"/>
+            </s:decorate>
+
+
+            <s:decorate  template="layout/edit.xhtml">
+                <ui:define name="label">Função</ui:define>
+                <h:inputText id="bowFuncao"
+                       required="true"
+                          value="#{projetoHome.instance.bowFuncao}">
+                    <a:support event="onblur" reRender="bowFuncao" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+			</rich:tab>
+
+
+		<rich:tab label="Tagger">
+
+            <s:decorate id="taggerDiretorioEntradaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório entrada</ui:define>
+                <h:inputTextarea id="taggerDiretorioEntrada"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.taggerDiretorioEntrada}"/>
+ 				<rich:suggestionbox for="taggerDiretorioEntrada" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+                              
+            </s:decorate>
+
+
+            <s:decorate id="taggerDiretorioSaidaField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório saída</ui:define>
+                <h:inputTextarea id="taggerDiretorioSaida"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.taggerDiretorioSaida}"/>
+    			<rich:suggestionbox for="taggerDiretorioSaida" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+                            
+                             
+            </s:decorate>
+
+
+            <s:decorate id="taggerDiretorioTaggerField" template="layout/edit.xhtml">
+                <ui:define name="label">Diretório de tagger</ui:define>
+                <h:inputTextarea id="taggerDiretorioTagger"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.taggerDiretorioTagger}"/>
+     			<rich:suggestionbox for="taggerDiretorioTagger" 
+				   suggestionAction="#{dirAutoComplete.sugestionDir}"
+				   var="dir" fetchValue="#{dir}" >
+					<rich:column>
+						<h:outputText value="#{dir}" />
+					</rich:column>
+				</rich:suggestionbox>
+                            
+ 
+ 
+            </s:decorate>
+
+
+            <s:decorate id="taggerMascaraField" template="layout/edit.xhtml">
+                <ui:define name="label">Mascara</ui:define>
+                <h:inputTextarea id="taggerMascara"
+                               cols="80"
+                               rows="1"
+                              value="#{projetoHome.instance.taggerMascara}"/>
+            </s:decorate>
+
+
+            <s:decorate id="taggerNumeroThreadsField" template="layout/edit.xhtml">
+                <ui:define name="label">Número de threads</ui:define>
+                <h:inputText id="taggerNumeroThreads"
+                       required="true"
+                          value="#{projetoHome.instance.taggerNumeroThreads}">
+                    <a:support event="onblur" reRender="taggerNumeroThreadsField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+			</rich:tab>
+        <div style="clear:both">
+			<span class="required">*</span>
+			Campos Obrigatórios
+        </div>
+		
+        <!-- /rich:panel-->
+		</rich:tabPanel>
+		
+		
+		
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{projetoHome.persist}"
+                       disabled="#{!projetoHome.wired}"
+                       rendered="#{!projetoHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{projetoHome.update}"
+                       rendered="#{projetoHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{projetoHome.remove}"
+                      immediate="true"
+                       rendered="#{projetoHome.managed}"/>
+
+            <s:button id="done"
+                   value="Done"
+             propagation="end"
+                    view="/ProjetoList.xhtml"
+                rendered="#{projetoHome.managed}"/>
+
+            <s:button id="cancel"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty projetoFrom ? 'ProjetoList' : projetoFrom}.xhtml"
+                rendered="#{!projetoHome.managed}"/>
+
+        </div>
+    </h:form>
+		<ui:include src="/pages/modal/filtroOrigemDestinosForm.xhtml">
+			<ui:param name="panelName" value="panelParte" />
+			<ui:param name="listTipoOrigemDestinos"
+				value="#{documentoManager.getTiposPefPej()}" />
+			<ui:param name="base" value="#{denunciaManager}" />
+			<ui:param name="metodo" value="adicionarParte" />
+			<ui:param name="labelName" value="Parte" />
+			<ui:param name="reRenderOnComplete"
+				value="decorateParteDenuncia,_tabelaPartes" />
+			<ui:param name="modalName" value="modalParte" />
+		</ui:include>
+</ui:define>
+
+</ui:composition>
